@@ -172,6 +172,7 @@ small { font-size: max(var(--size-caption), 0.85em); }
 .seg a:hover { color: var(--text-primary-on); }
 /* The active tab carries its own fill so its text is measured against it. */
 .seg a[aria-current="true"] { background: var(--fill-primary-on); color: var(--text-primary); }
+.seg a[aria-current="page"] { background: var(--fill-primary-on); color: var(--text-primary); }
 .theme-btn {
   flex: none;
   width: 36px; height: 36px;

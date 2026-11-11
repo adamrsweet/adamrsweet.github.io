@@ -15,8 +15,14 @@
     var sections = [].slice.call(doc.querySelectorAll("section[data-nav]"));
     var header = doc.querySelector("header.nav[data-auto]");
     if (header) {
-      header.innerHTML = '<nav class="seg" aria-label="Sections">' +
-        each(sections, function (s) { return '<a href="#' + esc(s.id) + '">' + esc(s.getAttribute("data-nav")) + "</a>"; }) + "</nav>" +
+      var site = [["Home", "/"], ["Stories", "/stories/"], ["Become a patron", "https://adamsweet.bandcamp.com/patrons"], ["Commission a song", "/commissions/"]];
+      var here = location.pathname.replace(/index\.html$/, "");
+      header.innerHTML = '<nav class="seg" aria-label="Site">' +
+        each(site, function (l) {
+          var ext = l[1].charAt(0) !== "/";
+          var cur = !ext && (l[1] === "/" ? here === "/" : here.indexOf(l[1]) === 0);
+          return '<a href="' + esc(l[1]) + '"' + (ext ? ' target="_blank" rel="noopener"' : "") + (cur ? ' aria-current="page"' : "") + ">" + esc(l[0]) + "</a>";
+        }) + "</nav>" +
         '<button class="theme-btn" id="theme-btn" type="button" aria-label="Switch to dark theme"></button>';
     }
     [].slice.call(doc.querySelectorAll(".foot nav[data-auto]")).forEach(function (n) {
@@ -87,7 +93,7 @@
     label();
 
     var seg = doc.querySelector(".seg");
-    if (seg) {
+    if (seg && seg.getAttribute("aria-label") !== "Site") {
       var links = [].slice.call(seg.querySelectorAll("a"));
       var targets = links.map(function (a) { return doc.getElementById(a.getAttribute("href").slice(1)); });
       var active = -2;
