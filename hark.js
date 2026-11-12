@@ -15,7 +15,7 @@
     var sections = [].slice.call(doc.querySelectorAll("section[data-nav]"));
     var header = doc.querySelector("header.nav[data-auto]");
     if (header) {
-      var site = [["Home", "/"], ["Stories", "/stories/"], ["Become a patron", "https://adamsweet.bandcamp.com/patrons"], ["Commission a song", "/commissions/"]];
+      var site = [["Home", "/"], ["Stories", "/stories/"], ["Become a patron", "/patron/"], ["Commission a song", "/commissions/"]];
       var here = location.pathname.replace(/index\.html$/, "");
       header.innerHTML = '<nav class="seg" aria-label="Site">' +
         each(site, function (l) {
